@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;            
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgb(195, 221, 221);
+            border-bottom: solid black 4px;
+            color: rgb(5, 21, 46);
+
+        }
+
+        select, button {            
+            width: 15rem;
+            margin: .5rem;
+            height: 2rem;
+            font-size: 1.3rem;
+            border-radius: 45px;
+        }
+
+        button {
+            background-color: rgb(73, 73, 255);
+            color: rgb(255, 255, 255);
+            border-radius: 25px;
+        }
+
+        p {
+            font-size: 1.5rem;
+        }
+
+        .introducao {
+            display: flex;
+            width: 80%;
+            margin: 2rem auto;
+            align-items: center;
+            text-align: justify;            
+        }
+
+
+        div.seleciona {
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;            
+        }
+
+        div#res {
+            display: grid;
+            grid-template-columns: 1fr 1fr;            
+            
+            
+            
+        }
+
+        div.frame {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: .8rem;
+        }
+
+        div.dados {
+            text-align: center;
+            font-size: 1.5rem;
+            border: solid black 1px;
+            width: 10rem;
+            height: 3.6rem;
+            
+            
+        }
+
+        footer {
+            margin-top: 4rem;
+            border-top: solid black 2px;
+            text-align: center;
+            bottom: 0;;
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <header>
+        <h1>DADOS DO COVID ATUALIZADOS</h1>
+    </header>
+
+    <div class="corpo">
+        <div class="introducao">
+            <p>
+                A <strong>COVID-19</strong> é uma doença causada por um vírus da família dos coronavírus e provoca sintomas como febre, tosse e dificuldade respiratória. Os primeiros casos da doença surgiram no final do ano de 2019, na China. No primeiro semestre de 2020, a doença já havia atingindo todos os continentes, sendo classificada como uma pandemia.
+            </p>
+        </div>
+
+        <div>
+            
+            <div class="seleciona">
+                <select class="selecionado" id="selectUf">
+                    <optgroup>
+                        <option value="">Selecione um estado</option>
+                        <option value="0">SP</option>
+                        <option value="1">MG</option>
+                        <option value="2">RS</option>
+                        <option value="3">BA</option>
+                        <option value="4">SC</option>
+                        <option value="5">RJ</option>
+                        <option value="6">CE</option>
+                        <option value="7">GO</option>
+                        <option value="8">PA</option>
+                        <option value="9">PE</option>
+                        <option value="10">ES</option>
+                        <option value="11">MT</option>
+                        <option value="12">DF</option>
+                        <option value="13">AM</option>
+                        <option value="14">PB</option>
+                        <option value="15">RN</option>
+                        <option value="16">MS</option>
+                        <option value="17">MA</option>
+                        <option value="18">PI</option>
+                        <option value="19">SE</option>
+                        <option value="20">RO</option>
+                        <option value="21">AL</option>
+                        <option value="22">TO</option>
+                        <option value="23">AP</option>
+                        <option value="24">RR</option>
+                        <option value="25">AC</option>
+                    </optgroup>
+                </select>                
+                <button onclick="mostraDados()">Mostrar dados</button>
+            </div>
+
+            <div id="res">
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer>
+        <p>Fonde de dados do site: <a target="blank" href="https://apify.com/covid-19">APIs for COVID-19 statistics</a></p>
+    </footer>
+
+    <script>
+
+        function getApi(url) {
+            var resquest = new XMLHttpRequest();
+            resquest.open("GET", url, false);
+            resquest.send();
+            return resquest.response;
+        };
+
+        var campoResultado = document.getElementById('res');
+        var selectElement = document.getElementById('selectUf');
+
+        function mostraDados() {
+
+            campoResultado.innerHTML = 'Carregando dados...'
+
+            var dadosApi = JSON.parse(getApi('https://api.apify.com/v2/key-value-stores/TyToNta7jGKkpszMZ/records/LATEST?disableRedirect=true'));
+
+            var selecinado = parseInt(document.getElementById('selectUf').value);
+
+            //Coleta de dados sobre o covid da api
+            var totalInfectados = dadosApi['infected'];
+            var totalMortes = dadosApi['deceased'];
+            var totalRecuperados = dadosApi['recovered'];            
+            var uf = dadosApi['infectedByRegion'][selecinado + 1]['state'];
+            var infectadosUf = dadosApi['infectedByRegion'][selecinado + 1]['count'];
+            //Formatando horário
+            var index = (dadosApi['lastUpdatedAtSource'].indexOf('T'));
+            var data = dadosApi['lastUpdatedAtSource'].substring(0, index);
+            var horario = dadosApi['lastUpdatedAtSource'].substring(index + 1, index + 6)       
+            //Calculando porcentagem
+            var porcentagemInfectados =  (infectadosUf * 100) / totalInfectados;
+            var porcentagemRecuperacao = (totalRecuperados * 100) / totalInfectados;
+            var porcentagemMortes = (totalMortes * 100) / totalInfectados;
+
+            campoResultado.innerHTML = `
+            <div class="frame">
+                <h3><b>Total infectados no BRASIL</b></h3>
+                <div class="dados">
+                    <p>${(totalInfectados).toLocaleString('pt-BR')}</p>
+                </div>
+            </div>
+
+            <div class="frame">   
+                <h3><b>Total infectados em ${uf}</b></h3>
+                <div class="dados">
+                    <p>${(infectadosUf).toLocaleString('pt-BR')}</p>
+                </div>
+            </div>
+
+            <div class="frame">
+                <h3><b>Percentual de infecção de SC em relação ao país</b></h3>
+                <div class="dados">
+                    <p>${porcentagemInfectados.toFixed(2)}%</p>
+                </div>
+            </div>
+
+            <div class="frame">
+                <h3><b>Percentual de recuperados no BRASIL</b></h3>
+                <div class="dados">
+                    <p>${porcentagemRecuperacao.toFixed(2)}%</p>
+                </div>
+                </div>
+            <div class="frame">
+                <h3><b>Percentual de mortes no BRASIL</b></h3>
+                <div class="dados">
+                    <p>${porcentagemMortes.toFixed(2)}%</p>
+                </div>
+            </div>
+
+            <div class="frame">
+                <h3><b>Última atualização</b></h3>
+                <div class="dados">
+                    <p>${data} | ${horario}</p>
+                </div>
+            </div>
+            `;            
+        };
+
+    </script>
+</body>
+</html>
