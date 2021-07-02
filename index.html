@@ -8,6 +8,8 @@
 
     <style>
 
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -15,16 +17,23 @@
 
         body {
             width: 100vw;
-            height: 100vh;            
+            height: 100vh;
+            font-family: 'Noto Sans KR', sans-serif;          
         }
 
         header {
             text-align: center;
             padding: 2rem;
-            background-color: rgb(195, 221, 221);
+            background: url('fotos/covid-background.png');
+            background-repeat: repeat;
+            background-position-x: center;
+            background-position-y: center;
+            background-position: center;
+            height: 8rem;
+            /*background-color: rgb(236, 93, 93);*/
             border-bottom: solid black 4px;
-            color: rgb(5, 21, 46);
-
+            color: rgb(255, 255, 255);
+            font-size: 1.3rem;
         }
 
         select, button {            
@@ -36,7 +45,7 @@
         }
 
         button {
-            background-color: rgb(73, 73, 255);
+            background-color: rgb(236, 93, 93);
             color: rgb(255, 255, 255);
             border-radius: 25px;
         }
@@ -55,7 +64,7 @@
 
 
         div.seleciona {
-            margin: auto;
+            margin: 4rem auto;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -64,37 +73,65 @@
 
         div#res {
             display: grid;
-            grid-template-columns: 1fr 1fr;            
-            
-            
+            grid-template-columns: 1fr 1fr;           
             
         }
 
         div.frame {
+            
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
             margin: .8rem;
+            width: 100%;
+            text-align: center;
         }
 
         div.dados {
-            text-align: center;
-            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
             border: solid black 1px;
-            width: 10rem;
-            height: 3.6rem;
-            
+            width: 80%;
+            height: 4.2rem;   
+
+            background-color: rgb(236, 93, 93);      
+            color: rgb(255, 255, 255);  
+            border-radius: 5rem;
             
         }
 
+
         footer {
             margin-top: 4rem;
+            margin-bottom: .5rem;
             border-top: solid black 2px;
             text-align: center;
             bottom: 0;;
             width: 100%;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: black;
+        }
+
+        footer p {
+            margin: 1rem;
+        }
+
+        .publicacao {
+            display: flex;        
+            flex-direction: row;    
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        frame {
+            height: 100%;
         }
 
     </style>
@@ -103,7 +140,8 @@
 <body>
     
     <header>
-        <h1>DADOS DO COVID ATUALIZADOS</h1>
+        <!-- <h1>DADOS DO COVID ATUALIZADOS</h1>
+        <img style="width: 100px;" src="fotos/covid19.png" alt="" srcset=""> -->
     </header>
 
     <div class="corpo">
@@ -111,6 +149,7 @@
             <p>
                 A <strong>COVID-19</strong> é uma doença causada por um vírus da família dos coronavírus e provoca sintomas como febre, tosse e dificuldade respiratória. Os primeiros casos da doença surgiram no final do ano de 2019, na China. No primeiro semestre de 2020, a doença já havia atingindo todos os continentes, sendo classificada como uma pandemia.
             </p>
+            
         </div>
 
         <div>
@@ -121,44 +160,51 @@
                         <option value="">Selecione um estado</option>
                         <option value="0">SP</option>
                         <option value="1">MG</option>
-                        <option value="2">RS</option>
-                        <option value="3">BA</option>
-                        <option value="4">SC</option>
-                        <option value="5">RJ</option>
-                        <option value="6">CE</option>
-                        <option value="7">GO</option>
-                        <option value="8">PA</option>
-                        <option value="9">PE</option>
-                        <option value="10">ES</option>
-                        <option value="11">MT</option>
-                        <option value="12">DF</option>
-                        <option value="13">AM</option>
-                        <option value="14">PB</option>
-                        <option value="15">RN</option>
-                        <option value="16">MS</option>
-                        <option value="17">MA</option>
-                        <option value="18">PI</option>
-                        <option value="19">SE</option>
-                        <option value="20">RO</option>
-                        <option value="21">AL</option>
-                        <option value="22">TO</option>
-                        <option value="23">AP</option>
-                        <option value="24">RR</option>
-                        <option value="25">AC</option>
+                        <option value="2">PR</option>
+                        <option value="3">RS</option>
+                        <option value="4">BA</option>
+                        <option value="5">SC</option>
+                        <option value="6">RJ</option>
+                        <option value="7">CE</option>
+                        <option value="8">GO</option>
+                        <option value="9">PA</option>
+                        <option value="10">PE</option>
+                        <option value="11">ES</option>
+                        <option value="12">MT</option>
+                        <option value="13">DF</option>
+                        <option value="14">AM</option>
+                        <option value="15">PB</option>
+                        <option value="16">RN</option>
+                        <option value="17">MS</option>
+                        <option value="18">MA</option>
+                        <option value="19">PI</option>
+                        <option value="20">SE</option>
+                        <option value="21">RO</option>
+                        <option value="22">AL</option>
+                        <option value="23">TO</option>
+                        <option value="24">AP</option>
+                        <option value="25">RR</option>
+                        <option value="26">AC</option>
                     </optgroup>
                 </select>                
                 <button onclick="mostraDados()">Mostrar dados</button>
+
             </div>
 
             <div id="res">
             </div>
-
+        </div>
+        <div class="publicacao">
+            <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fminsaude%2Fposts%2F4727573727261206&show_text=true&width=500" width="500" height="579" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+            </iframe>
+            <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fnacoesunidas%2Fposts%2F10160853089232506&show_text=true&width=500" width="500" height="579" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+            </iframe>
         </div>
     </div>
 
 
     <footer>
-        <p>Fonde de dados do site: <a target="blank" href="https://apify.com/covid-19">APIs for COVID-19 statistics</a></p>
+        <p>Fonde de dados do site:<b> <a target="blank" href="https://apify.com/covid-19">APIs for COVID-19 statistics</a></b></p>
     </footer>
 
     <script>
@@ -185,8 +231,8 @@
             var totalInfectados = dadosApi['infected'];
             var totalMortes = dadosApi['deceased'];
             var totalRecuperados = dadosApi['recovered'];            
-            var uf = dadosApi['infectedByRegion'][selecinado + 1]['state'];
-            var infectadosUf = dadosApi['infectedByRegion'][selecinado + 1]['count'];
+            var uf = dadosApi['infectedByRegion'][selecinado]['state'];
+            var infectadosUf = dadosApi['infectedByRegion'][selecinado]['count'];
             //Formatando horário
             var index = (dadosApi['lastUpdatedAtSource'].indexOf('T'));
             var data = dadosApi['lastUpdatedAtSource'].substring(0, index);
@@ -198,34 +244,34 @@
 
             campoResultado.innerHTML = `
             <div class="frame">
-                <h3><b>Total infectados no BRASIL</b></h3>
+                <h3><b>INFECTADOS NO BRASIL</b></h3>
                 <div class="dados">
                     <p>${(totalInfectados).toLocaleString('pt-BR')}</p>
                 </div>
             </div>
 
             <div class="frame">   
-                <h3><b>Total infectados em ${uf}</b></h3>
+                <h3><b>INFECTADOS EM ${uf}</b></h3>
                 <div class="dados">
                     <p>${(infectadosUf).toLocaleString('pt-BR')}</p>
                 </div>
             </div>
 
             <div class="frame">
-                <h3><b>Percentual de infecção de SC em relação ao país</b></h3>
+                <h3><b>INFECTADOS EM ${uf} % BRASIL</b></h3>
                 <div class="dados">
                     <p>${porcentagemInfectados.toFixed(2)}%</p>
                 </div>
             </div>
 
             <div class="frame">
-                <h3><b>Percentual de recuperados no BRASIL</b></h3>
+                <h3><b>RECUPERADOS NO BRASIL</b></h3>
                 <div class="dados">
                     <p>${porcentagemRecuperacao.toFixed(2)}%</p>
                 </div>
                 </div>
             <div class="frame">
-                <h3><b>Percentual de mortes no BRASIL</b></h3>
+                <h3><b>PERCENTUAL DE MORTES NO BRASIL</b></h3>
                 <div class="dados">
                     <p>${porcentagemMortes.toFixed(2)}%</p>
                 </div>
@@ -234,7 +280,9 @@
             <div class="frame">
                 <h3><b>Última atualização</b></h3>
                 <div class="dados">
-                    <p>${data} | ${horario}</p>
+                    <p>${data}</p>
+                    <p>${horario}</p>
+                    
                 </div>
             </div>
             `;            
