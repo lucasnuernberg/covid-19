@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="fotos/favicon.ico" />
     <title>COVID-19</title>
 
     <style>
@@ -18,17 +19,22 @@
         body {
             width: 100vw;
             height: 100vh;
-            font-family: 'Noto Sans KR', sans-serif;          
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: rgb(241, 240, 228);
         }
 
         header {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            position: relative;
             text-align: center;
             padding: 2rem;
-            background: url('fotos/covid-background.png');
+            background-color: rgb(241, 67, 67);
+            background: url('fotos/fundo-header.jpg');
             background-repeat: repeat;
-            background-position-x: center;
-            background-position-y: center;
-            background-position: center;
+            
+            background-position: top center;
             height: 8rem;
             /*background-color: rgb(236, 93, 93);*/
             border-bottom: solid black 4px;
@@ -36,12 +42,21 @@
             font-size: 1.3rem;
         }
 
+        header img {
+            width: 8rem;
+        }
+
+        header h1 {
+            font-size: 4.4rem;
+            text-shadow: 3px 2px 2px black;
+        }
+
         select, button {            
             width: 15rem;
             margin: .5rem;
             height: 2rem;
             font-size: 1.3rem;
-            border-radius: 45px;
+            border-radius: 5px;
         }
 
         button {
@@ -62,23 +77,25 @@
             text-align: justify;            
         }
 
-
         div.seleciona {
-            margin: 4rem auto;
+            margin: 2rem auto;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;            
         }
 
+        div.seleciona h3 {
+            text-align: center;
+        }
+
         div#res {
             display: grid;
-            grid-template-columns: 1fr 1fr;           
+            grid-template-columns: 1fr 1fr;        
             
         }
 
-        div.frame {
-            
+        div.frame {            
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -89,6 +106,11 @@
             text-align: center;
         }
 
+        div.frame p {
+            text-align: center;
+        }
+
+        
         div.dados {
             display: flex;
             justify-content: center;
@@ -96,12 +118,10 @@
             flex-wrap: wrap;
             border: solid black 1px;
             width: 80%;
-            height: 4.2rem;   
-
+            height: 4.2rem;
             background-color: rgb(236, 93, 93);      
-            color: rgb(255, 255, 255);  
-            border-radius: 5rem;
-            
+            color: rgb(255, 255, 255);
+            border-radius: 5rem;            
         }
 
 
@@ -134,27 +154,68 @@
             height: 100%;
         }
 
+        nav {
+            position: absolute;
+            bottom: 0;            
+        }
+
+        nav a {
+            font-size: 1rem;
+            background-color: rgb(0, 0, 0);
+            padding: 0 .4rem;
+            border-radius: 5rem;
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            border: solid 1px rgb(255, 255, 255);
+        }
+
+        div.consulta {
+            margin: 6rem;
+            padding: 2rem;
+            border: dotted black 1px;
+            border-radius: 2rem;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        /*782*/
+        @media(max-width: 782px) {
+            header h1 {
+            font-size: 2.6rem;
+            text-shadow: 3px 2px 2px black;
+        }
+
+        }
+
     </style>
 
 </head>
 <body>
     
     <header>
-        <!-- <h1>DADOS DO COVID ATUALIZADOS</h1>
-        <img style="width: 100px;" src="fotos/covid19.png" alt="" srcset=""> -->
+        <img src="fotos/covid19.png" alt="virus">
+        <h1>COVID-19</h1>
+        <img src="fotos/covid19.png" alt="virus">
+        <nav>
+            <a href="#sobre">Sobre o covid</a>
+            <a href="#consulta">Dados para consulta</a>
+            <a href="#noticias">Noticias</a>
+        </nav>
     </header>
 
     <div class="corpo">
-        <div class="introducao">
+        <div id="sobre" class="introducao">
             <p>
                 A <strong>COVID-19</strong> é uma doença causada por um vírus da família dos coronavírus e provoca sintomas como febre, tosse e dificuldade respiratória. Os primeiros casos da doença surgiram no final do ano de 2019, na China. No primeiro semestre de 2020, a doença já havia atingindo todos os continentes, sendo classificada como uma pandemia.
             </p>
             
         </div>
 
-        <div>
-            
-            <div class="seleciona">
+        <div class="consulta" id="consulta">
+            <h2 style="text-align: center;">Consulta de Dados por Estado</h2>
+            <div class="seleciona" >
                 <select class="selecionado" id="selectUf">
                     <optgroup>
                         <option value="">Selecione um estado</option>
@@ -194,7 +255,10 @@
             <div id="res">
             </div>
         </div>
+        <h1 id="noticias" style="text-align: center; margin-bottom: 1rem; background-color: rgb(246, 93, 93); width: 35%; margin: 1rem auto; border-radius: 3rem;border: solid 2px black;">Notícias</h1>
         <div class="publicacao">
+            
+
             <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fminsaude%2Fposts%2F4727573727261206&show_text=true&width=500" width="500" height="579" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
             </iframe>
             <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fnacoesunidas%2Fposts%2F10160853089232506&show_text=true&width=500" width="500" height="579" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
@@ -276,16 +340,15 @@
                     <p>${porcentagemMortes.toFixed(2)}%</p>
                 </div>
             </div>
-
             <div class="frame">
-                <h3><b>Última atualização</b></h3>
+                <h3><b>PERCENTUAL DE MORTES NO BRASIL</b></h3>
                 <div class="dados">
-                    <p>${data}</p>
-                    <p>${horario}</p>
-                    
+                    <p>${porcentagemMortes.toFixed(2)}%</p>
                 </div>
             </div>
-            `;            
+
+            <p>Última Atualização: ${data}</p>
+            `;
         };
 
     </script>
