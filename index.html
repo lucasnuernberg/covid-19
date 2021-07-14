@@ -90,8 +90,12 @@
         }
 
         div#res {
-            display: grid;
-            grid-template-columns: 1fr 1fr;        
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+                  
             
         }
 
@@ -102,7 +106,7 @@
             align-items: center;
             flex-wrap: wrap;
             margin: .8rem;
-            width: 100%;
+            width: 70%;
             text-align: center;
         }
 
@@ -171,34 +175,43 @@
         }
 
         div.consulta {
-            margin: 6rem 0.2rem;
+            margin: 6rem auto;
             padding: 2rem;
             border: dotted black 1px;
             border-radius: 2rem;
+            width: 80%;
         }
 
         p {
             text-align: center;
         }
 
-        /*782*/
+        span {
+            color: rgb(238, 4, 4);
+        }
+
         @media(max-width: 782px) {
             header h1 {
             font-size: 2.3rem;
             text-shadow: 3px 2px 2px black;
-        }
-        nav a {
-            font-size: .8rem;
-            background-color: rgb(0, 0, 0);
-            padding: 0 .4rem;
-            border-radius: 5rem;
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            border: solid 1px rgb(255, 255, 255);
-        }
-        header img {
-            width: 4.6rem;
-        }
+            }
+            
+            nav a {
+                font-size: .8rem;
+                background-color: rgb(0, 0, 0);
+                padding: 0 .4rem;
+                border-radius: 5rem;
+                text-decoration: none;
+                color: rgb(255, 255, 255);
+                border: solid 1px rgb(255, 255, 255);
+            }
+            header img {
+                width: 4.6rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
 
         }
 
@@ -276,6 +289,7 @@
             </iframe>
             <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fnacoesunidas%2Fposts%2F10160853089232506&show_text=true&width=500" width="500" height="579" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
             </iframe>
+            
         </div>
     </div>
 
@@ -321,38 +335,32 @@
 
             campoResultado.innerHTML = `
             <div class="frame">
-                <h3><b>INFECTADOS NO BRASIL</b></h3>
+                <h3><b>TOTAL DE INFECÇÕES NO BRASIL</b></h3>
                 <div class="dados">
                     <p>${(totalInfectados).toLocaleString('pt-BR')}</p>
                 </div>
             </div>
 
             <div class="frame">   
-                <h3><b>INFECTADOS EM ${uf}</b></h3>
+                <h3><b>TOTAL DE INFECÇÕES EM <span>${uf}</span></b></h3>
                 <div class="dados">
                     <p>${(infectadosUf).toLocaleString('pt-BR')}</p>
                 </div>
             </div>
 
             <div class="frame">
-                <h3><b>INFECTADOS EM ${uf} % BRASIL</b></h3>
+                <h3><b>PERCENTUAL DE INFECÇÕES EM <span>${uf}</span> RELAÇÃO AO BRASIL</b></h3>
                 <div class="dados">
                     <p>${porcentagemInfectados.toFixed(2)}%</p>
                 </div>
             </div>
 
             <div class="frame">
-                <h3><b>RECUPERADOS NO BRASIL</b></h3>
+                <h3><b>PERCENTUAL DE RECUPERADOS NO BRASIL</b></h3>
                 <div class="dados">
                     <p>${porcentagemRecuperacao.toFixed(2)}%</p>
                 </div>
                 </div>
-            <div class="frame">
-                <h3><b>PERCENTUAL DE MORTES NO BRASIL</b></h3>
-                <div class="dados">
-                    <p>${porcentagemMortes.toFixed(2)}%</p>
-                </div>
-            </div>
             <div class="frame">
                 <h3><b>PERCENTUAL DE MORTES NO BRASIL</b></h3>
                 <div class="dados">
